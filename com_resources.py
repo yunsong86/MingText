@@ -8,8 +8,6 @@
 """
 
 STOP_WORDS_DIR = '/mnt/hgfs/UbunutWin/resources/stopwords.txt'
-
-
-STOP_WORDS_LIST = []
-with open(STOP_WORDS_DIR, 'r', encoding='utf-8') as file_obj:
-    STOP_WORDS_LIST = [w.strip() for w in file_obj if w]
+file_read = open(STOP_WORDS_DIR, 'r', encoding='utf-8')
+STOP_WORDS_LIST = [w.strip() for w in file_read if w]
+file_read.close()

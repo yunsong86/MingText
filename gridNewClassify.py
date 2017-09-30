@@ -16,19 +16,32 @@ from sklearn.metrics import classification_report
 from sklearn.svm import SVC, LinearSVC
 
 
-
 def evaluate_estimator(X_train, X_test, y_train, y_test, cl, parameters):
-    scores = ['accuracy', 'adjusted_rand_score', 'average_precision', 'f1', 'f1_macro', 'f1_micro', 'f1_samples',
-              'f1_weighted', 'log_loss', 'mean_absolute_error', 'mean_squared_error', 'median_absolute_error',
-              'precision', 'precision_macro', 'precision_micro', 'precision_samples', 'precision_weighted', 'r2',
-              'recall', 'recall_macro', 'recall_micro', 'recall_samples', 'recall_weighted', 'roc_auc']
+    # scores = ['accuracy', 'adjusted_rand_score', 'average_precision', 'f1', 'f1_macro', 'f1_micro', 'f1_samples',
+    #           'f1_weighted', 'log_loss', 'mean_absolute_error', 'mean_squared_error', 'median_absolute_error',
+    #           'precision', 'precision_macro', 'precision_micro', 'precision_samples', 'precision_weighted', 'r2',
+    #           'recall', 'recall_macro', 'recall_micro', 'recall_samples', 'recall_weighted', 'roc_auc']
+    scores = ['accuracy',
+              'f1',
+              'f1_macro',
+              'f1_micro',
+              'f1_weighted',
+              'precision',
+              'precision_macro',
+              'precision_micro',
+              'precision_weighted',
+              'recall',
+              'recall_macro',
+              'recall_micro',
+              'recall_weighted',
+              'roc_auc']
 
     for score in scores:
         starttime = datetime.now()
         logger.info("# Tuning hyper-parameters for %s" % score)
         logger.info('START:********************%s********************' % score)
         try:
-            clf = GridSearchCV(cl, parameters, cv=10, scoring=score)
+            clf = GridSearchCV(cl, parameters, cv=10, scoring=score, n_jobs=-1)
             clf.fit(X_train, y_train)
             logger.info("Best parameters set found on development set:")
             logger.info(clf.best_params_)
@@ -48,33 +61,19 @@ def evaluate_estimator(X_train, X_test, y_train, y_test, cl, parameters):
         except Exception as e:
             logger.info(e)
         endtime = datetime.now()
-        logger.info('耗时:********************%s********************\n' % str((endtime-starttime).seconds))
+        logger.info('耗时:********************%s********************\n' % str((endtime - starttime).seconds))
 
         logger.info('END:********************%s********************\n' % score)
-
-
-def do():
-    # Loading the Digits dataset
-    digits = datasets.load_digits()
-
-    # To apply an classifier on this data, we need to flatten the image, to
-    # turn the data in a (samples, feature) matrix:
-    n_samples = len(digits.images)
-    X = digits.images.reshape((n_samples, -1))
-    y = digits.target
-
-    # Split the dataset in two equal parts
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=0)
-    cl = LinearSVC(C=1)
-    evaluate_estimator(X_train, X_test, y_train, y_test, cl, lsvc_tuned_parameters)
 
 
 if __name__ == '__main__':
     file_obj = open('/mnt/hgfs/UbunutWin/corpus/news_data_model/tfidfwordbag.dat', 'rb')
     tfidf_wordbag_Bunch = pickle.load(file_obj)
     file_obj.close()
-    X_train, X_test, y_train, y_test = train_test_split(tfidf_wordbag_Bunch.tfidf, tfidf_wordbag_Bunch.label,
-                                                        test_size=0.5, random_state=0)
+    X_train, X_test, y_train, y_test = train_test_split(tfidf_wordbag_Bunch.tfidf,
+                                                        tfidf_wordbag_Bunch.label,
+                                                        test_size=0.3, random_state=0,
+                                                        stratify=tfidf_wordbag_Bunch.label)
     cl = LinearSVC(C=1)
     lsvc_tuned_parameters = [{'C': [1, 10, 100, 1000],
                               'multi_class': ['ovr', 'crammer_singer'],

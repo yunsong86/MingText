@@ -201,7 +201,7 @@ class TextPreprocess:
         # 构建语料
         corpus = self.dataset_Bunch.contents
         # 使用TfidfVectorizer初始化向量空间模型--创建词袋
-        vectorizer = TfidfVectorizer(max_df=0.9)
+        vectorizer = TfidfVectorizer(sublinear_tf=True, max_df= 0.5)
         # 文本转为词频矩阵
         self.tfidf_wordbag_Bunch.tfidf = vectorizer.fit_transform(corpus)
         # 保存词袋词典文件

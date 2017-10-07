@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from sklearn.datasets.samples_generator import make_blobs
 # from  .agglomerative_clustering import test_AgglomerativeClustering,test_AgglomerativeClustering_nclusters,test_AgglomerativeClustering_linkage
 # from .dbscan import test_DBSCAN,test_DBSCAN_epsilon,test_DBSCAN_min_samples
-from chapters.Cluster_EM.gmm import test_GMM,test_GMM_cov_type,test_GMM_n_components
+from Cluster_EM.gmm import test_GMM,test_GMM_cov_type,test_GMM_n_components
 # from .kmeans import test_Kmeans,test_Kmeans_n_init,test_Kmeans_nclusters
 
 def create_data(centers,num=100,std=0.7):

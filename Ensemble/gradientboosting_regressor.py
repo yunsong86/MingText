@@ -22,7 +22,7 @@ def load_data_regression():
     diabetes = datasets.load_diabetes() #使用 scikit-learn 自带的一个糖尿病病人的数据集
     return cross_validation.train_test_split(diabetes.data,diabetes.target,
     test_size=0.25,random_state=0) # 拆分成训练集和测试集，测试集大小为原始数据集大小的 1/4
-def test_GradientBoostingRegressor(*data):
+def do_GradientBoostingRegressor(*data):
     '''
     测试 GradientBoostingRegressor 的用法
 
@@ -34,7 +34,7 @@ def test_GradientBoostingRegressor(*data):
     regr.fit(X_train,y_train)
     print("Training score:%f"%regr.score(X_train,y_train))
     print("Testing score:%f"%regr.score(X_test,y_test))
-def test_GradientBoostingRegressor_num(*data):
+def do_GradientBoostingRegressor_num(*data):
     '''
     测试 GradientBoostingRegressor 的预测性能随 n_estimators 参数的影响
 
@@ -60,7 +60,7 @@ def test_GradientBoostingRegressor_num(*data):
     ax.set_ylim(0,1.05)
     plt.suptitle("GradientBoostingRegressor")
     plt.show()
-def test_GradientBoostingRegressor_maxdepth(*data):
+def do_GradientBoostingRegressor_maxdepth(*data):
     '''
     测试 GradientBoostingRegressor 的预测性能随 max_depth 参数的影响
 
@@ -86,7 +86,7 @@ def test_GradientBoostingRegressor_maxdepth(*data):
     ax.set_ylim(-1,1.05)
     plt.suptitle("GradientBoostingRegressor")
     plt.show()
-def test_GradientBoostingRegressor_learning(*data):
+def do_GradientBoostingRegressor_learning(*data):
     '''
     测试 GradientBoostingRegressor 的预测性能随 learning_rate 参数的影响
 
@@ -112,7 +112,7 @@ def test_GradientBoostingRegressor_learning(*data):
     ax.set_ylim(-1,1.05)
     plt.suptitle("GradientBoostingRegressor")
     plt.show()
-def test_GradientBoostingRegressor_subsample(*data):
+def do_GradientBoostingRegressor_subsample(*data):
     '''
     测试 GradientBoostingRegressor 的预测性能随 subsample 参数的影响
 
@@ -138,7 +138,7 @@ def test_GradientBoostingRegressor_subsample(*data):
     ax.set_ylim(-1,1.05)
     plt.suptitle("GradientBoostingRegressor")
     plt.show()
-def test_GradientBoostingRegressor_loss(*data):
+def do_GradientBoostingRegressor_loss(*data):
     '''
     测试 GradientBoostingRegressor 的预测性能随不同的损失函数和 alpha 参数的影响
 
@@ -187,7 +187,7 @@ def test_GradientBoostingRegressor_loss(*data):
     ax.set_title("loss=ls,lad")
     plt.suptitle("GradientBoostingRegressor")
     plt.show()
-def test_GradientBoostingRegressor_max_features(*data):
+def do_GradientBoostingRegressor_max_features(*data):
     '''
     测试 GradientBoostingRegressor 的预测性能随 max_features 参数的影响
 
@@ -216,10 +216,10 @@ def test_GradientBoostingRegressor_max_features(*data):
 
 if __name__=='__main__':
     X_train,X_test,y_train,y_test=load_data_regression() # 获取回归数据
-    test_GradientBoostingRegressor(X_train,X_test,y_train,y_test) # 调用 test_GradientBoostingRegressor
-    # test_GradientBoostingRegressor_num(X_train,X_test,y_train,y_test) # 调用 test_GradientBoostingRegressor_num
-    # test_GradientBoostingRegressor_maxdepth(X_train,X_test,y_train,y_test) # 调用 test_GradientBoostingRegressor_maxdepth
-    # test_GradientBoostingRegressor_learning(X_train,X_test,y_train,y_test) # 调用 test_GradientBoostingRegressor_learning
-    # test_GradientBoostingRegressor_subsample(X_train,X_test,y_train,y_test) # 调用 test_GradientBoostingRegressor_subsample
-    # test_GradientBoostingRegressor_loss(X_train,X_test,y_train,y_test) # 调用 test_GradientBoostingRegressor_loss
-    # test_GradientBoostingRegressor_max_features(X_train,X_test,y_train,y_test) # 调用 test_GradientBoostingRegressor_max_features
+    do_GradientBoostingRegressor(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingRegressor
+    # do_GradientBoostingRegressor_num(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingRegressor_num
+    # do_GradientBoostingRegressor_maxdepth(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingRegressor_maxdepth
+    # do_GradientBoostingRegressor_learning(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingRegressor_learning
+    # do_GradientBoostingRegressor_subsample(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingRegressor_subsample
+    # do_GradientBoostingRegressor_loss(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingRegressor_loss
+    # do_GradientBoostingRegressor_max_features(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingRegressor_max_features

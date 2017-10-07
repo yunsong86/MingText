@@ -1,25 +1,26 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*- 
 """
-    集成学习
-    ~~~~~~~~~~~~~~~~
-
-    RandomForestClassifier
-
-    :copyright: (c) 2016 by the huaxz1986.
-    :license: lgpl-3.0, see LICENSE for more details.
+@author: PANYUNSONG
+@file: classifyNewsBaseOnRF.py
+@time: 2017/10/7 21:40
+@desc: python3.6
 """
-
+from sklearn import ensemble
+from sklearn.feature_extraction.text import  TfidfVectorizer
+from sklearn.datasets import load_files
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn import datasets,cross_validation,ensemble
-def load_data_classification():
-    '''
-    加载用于分类问题的数据集
 
-    :return: 一个元组，用于分类问题。元组元素依次为：训练样本集、测试样本集、训练样本集对应的标记、测试样本集对应的标记
-    '''
-    digits=datasets.load_digits() # 使用 scikit-learn 自带的 digits 数据集
-    return cross_validation.train_test_split(digits.data,digits.target,
-    test_size=0.25,random_state=0,stratify=digits.target) # 分层采样拆分成训练集和测试集，测试集大小为原始数据集大小的 1/4
+def load_new_data(corpus_dir):
+    news = load_files(corpus_dir, encoding='utf-8')
+    tfidf_vect = TfidfVectorizer()
+    X = tfidf_vect.fit_transform(news.data)
+    X_train, X_test, y_train, y_test = train_test_split(X, news.target, test_size=0.3, stratify=news.target)
+    return X_train, X_test, y_train, y_test
+
+
 def do_RandomForestClassifier(*data):
     '''
     测试 RandomForestClassifier 的用法
@@ -110,9 +111,11 @@ def do_RandomForestClassifier_max_features(*data):
     ax.set_ylim(0,1.05)
     plt.suptitle("RandomForestClassifier")
     plt.show()
-if __name__=='__main__':
-    X_train,X_test,y_train,y_test=load_data_classification()  # 获取分类数据
+
+if __name__ == '__main__':
+    corpus_dir = 'D:/UbunutWin/corpus/news_data/BQ20_seg'
+    X_train, X_test, y_train, y_test = load_new_data(corpus_dir)
     do_RandomForestClassifier(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier
-    # do_RandomForestClassifier_num(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_num
-    # do_RandomForestClassifier_max_depth(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_max_depth
-    # do_RandomForestClassifier_max_features(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_max_features
+    do_RandomForestClassifier_num(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_num
+    do_RandomForestClassifier_max_depth(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_max_depth
+    do_RandomForestClassifier_max_features(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_max_features

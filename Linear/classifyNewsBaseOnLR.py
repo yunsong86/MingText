@@ -1,28 +1,25 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# -*- coding:utf-8 -*- 
 """
-    广义线性模型
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Logistic 回归（也称作对数几率回归）
-
-    :copyright: (c) 2016 by the huaxz1986.
-    :license: lgpl-3.0, see LICENSE for more details.
+@author: PANYUNSONG
+@file: classifyNewsBaseOnLR.py
+@time: 2017/10/7 23:31
+@desc: python3.6
 """
+from sklearn.feature_extraction.text import  TfidfVectorizer
+from sklearn.datasets import load_files
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn import datasets, linear_model,cross_validation
 
-def load_data():
-    '''
-    加载用于分类问题的数据集
+def load_new_data(corpus_dir):
+    news = load_files(corpus_dir, encoding='utf-8')
+    tfidf_vect = TfidfVectorizer()
+    X = tfidf_vect.fit_transform(news.data)
+    X_train, X_test, y_train, y_test = train_test_split(X, news.target, test_size=0.3, stratify=news.target)
+    return X_train, X_test, y_train, y_test
 
-    :return: 一个元组，用于分类问题。元组元素依次为：训练样本集、测试样本集、训练样本集对应的标记、测试样本集对应的标记
-    '''
-    iris=datasets.load_iris() # 使用 scikit-learn 自带的 iris 数据集
-    X_train=iris.data
-    y_train=iris.target
-    return cross_validation.train_test_split(X_train, y_train,test_size=0.25,
-		random_state=0,stratify=y_train)# 分层采样拆分成训练集和测试集，测试集大小为原始数据集大小的 1/4
 def do_LogisticRegression(*data):
     '''
     测试 LogisticRegression 的用法
@@ -31,7 +28,7 @@ def do_LogisticRegression(*data):
     :return: None
     '''
     X_train,X_test,y_train,y_test=data
-    regr = linear_model.LogisticRegression()
+    regr = LogisticRegression()
     regr.fit(X_train, y_train)
     print('Coefficients:%s, intercept %s'%(regr.coef_,regr.intercept_))
     print('Score: %.2f' % regr.score(X_test, y_test))
@@ -43,7 +40,7 @@ def do_LogisticRegression_multinomial(*data):
     :return: None
     '''
     X_train,X_test,y_train,y_test=data
-    regr = linear_model.LogisticRegression(multi_class='multinomial',solver='lbfgs')
+    regr = LogisticRegression(multi_class='multinomial',solver='lbfgs')
     regr.fit(X_train, y_train)
     print('Coefficients:%s, intercept %s'%(regr.coef_,regr.intercept_))
     print('Score: %.2f' % regr.score(X_test, y_test))
@@ -58,7 +55,7 @@ def do_LogisticRegression_C(*data):
     Cs=np.logspace(-2,4,num=100)
     scores=[]
     for C in Cs:
-        regr = linear_model.LogisticRegression(C=C)
+        regr = LogisticRegression(C=C)
         regr.fit(X_train, y_train)
         scores.append(regr.score(X_test, y_test))
     ## 绘图
@@ -72,7 +69,8 @@ def do_LogisticRegression_C(*data):
     plt.show()
 
 if __name__=='__main__':
-    X_train,X_test,y_train,y_test=load_data() # 加载用于分类的数据集
+    corpus_dir = 'D:/UbunutWin/corpus/news_data/BQ20_seg'
+    X_train, X_test, y_train, y_test = load_new_data(corpus_dir)
     do_LogisticRegression(X_train,X_test,y_train,y_test) # 调用  do_LogisticRegression
     do_LogisticRegression_multinomial(X_train,X_test,y_train,y_test) # 调用  do_LogisticRegression_multinomial
     do_LogisticRegression_C(X_train,X_test,y_train,y_test) # 调用  do_LogisticRegression_C

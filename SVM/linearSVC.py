@@ -24,7 +24,7 @@ def load_data_classfication():
     return cross_validation.train_test_split(X_train, y_train,test_size=0.25,
 		random_state=0,stratify=y_train) # 分层采样拆分成训练集和测试集，测试集大小为原始数据集大小的 1/4
 
-def test_LinearSVC(*data):
+def do_LinearSVC(*data):
     '''
     测试 LinearSVC 的用法
 
@@ -36,7 +36,7 @@ def test_LinearSVC(*data):
     cls.fit(X_train,y_train)
     print('Coefficients:%s, intercept %s'%(cls.coef_,cls.intercept_))
     print('Score: %.2f' % cls.score(X_test, y_test))
-def test_LinearSVC_loss(*data):
+def do_LinearSVC_loss(*data):
     '''
     测试 LinearSVC 的预测性能随损失函数的影响
 
@@ -51,7 +51,7 @@ def test_LinearSVC_loss(*data):
         print("Loss:%f"%loss)
         print('Coefficients:%s, intercept %s'%(cls.coef_,cls.intercept_))
         print('Score: %.2f' % cls.score(X_test, y_test))
-def test_LinearSVC_L12(*data):
+def do_LinearSVC_L12(*data):
     '''
     测试 LinearSVC 的预测性能随正则化形式的影响
 
@@ -66,7 +66,7 @@ def test_LinearSVC_L12(*data):
         print("penalty:%s"%p)
         print('Coefficients:%s, intercept %s'%(cls.coef_,cls.intercept_))
         print('Score: %.2f' % cls.score(X_test, y_test))
-def test_LinearSVC_C(*data):
+def do_LinearSVC_C(*data):
     '''
     测试 LinearSVC 的预测性能随参数 C 的影响
 
@@ -96,7 +96,7 @@ def test_LinearSVC_C(*data):
     plt.show()
 if __name__=="__main__":
     X_train,X_test,y_train,y_test=load_data_classfication() # 生成用于分类的数据集
-    test_LinearSVC(X_train,X_test,y_train,y_test) # 调用 test_LinearSVC
-    # test_LinearSVC_loss(X_train,X_test,y_train,y_test) # 调用 test_LinearSVC_loss
-    # test_LinearSVC_L12(X_train,X_test,y_train,y_test) # 调用 test_LinearSVC_L12
-    # test_LinearSVC_C(X_train,X_test,y_train,y_test) # 调用 test_LinearSVC_C
+    do_LinearSVC(X_train,X_test,y_train,y_test) # 调用 do_LinearSVC
+    # do_LinearSVC_loss(X_train,X_test,y_train,y_test) # 调用 do_LinearSVC_loss
+    # do_LinearSVC_L12(X_train,X_test,y_train,y_test) # 调用 do_LinearSVC_L12
+    # do_LinearSVC_C(X_train,X_test,y_train,y_test) # 调用 do_LinearSVC_C

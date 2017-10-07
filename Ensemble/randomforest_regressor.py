@@ -20,7 +20,7 @@ def load_data_regression():
     diabetes = datasets.load_diabetes() #使用 scikit-learn 自带的一个糖尿病病人的数据集
     return cross_validation.train_test_split(diabetes.data,diabetes.target,
     test_size=0.25,random_state=0) # 拆分成训练集和测试集，测试集大小为原始数据集大小的 1/4
-def test_RandomForestRegressor(*data):
+def do_RandomForestRegressor(*data):
     '''
     测试 RandomForestRegressor 的用法
 
@@ -32,7 +32,7 @@ def test_RandomForestRegressor(*data):
     regr.fit(X_train,y_train)
     print("Traing Score:%f"%regr.score(X_train,y_train))
     print("Testing Score:%f"%regr.score(X_test,y_test))
-def test_RandomForestRegressor_num(*data):
+def do_RandomForestRegressor_num(*data):
     '''
     测试 RandomForestRegressor 的预测性能随  n_estimators 参数的影响
 
@@ -58,7 +58,7 @@ def test_RandomForestRegressor_num(*data):
     ax.set_ylim(-1,1)
     plt.suptitle("RandomForestRegressor")
     plt.show()
-def test_RandomForestRegressor_max_depth(*data):
+def do_RandomForestRegressor_max_depth(*data):
     '''
     测试 RandomForestRegressor 的预测性能随  max_depth 参数的影响
 
@@ -84,7 +84,7 @@ def test_RandomForestRegressor_max_depth(*data):
     ax.set_ylim(0,1.05)
     plt.suptitle("RandomForestRegressor")
     plt.show()
-def test_RandomForestRegressor_max_features(*data):
+def do_RandomForestRegressor_max_features(*data):
     '''
    测试 RandomForestRegressor 的预测性能随  max_features 参数的影响
 
@@ -112,8 +112,8 @@ def test_RandomForestRegressor_max_features(*data):
     plt.show()
 if __name__=='__main__':
     X_train,X_test,y_train,y_test=load_data_regression() # 获取回归数据
-    test_RandomForestRegressor(X_train,X_test,y_train,y_test) # 调用 test_RandomForestRegressor
-    # test_RandomForestRegressor_num(X_train,X_test,y_train,y_test) # 调用 test_RandomForestRegressor_num
-    # test_RandomForestRegressor_max_depth(X_train,X_test,y_train,y_test) # 调用 test_RandomForestRegressor_max_depth
-    # test_RandomForestRegressor_max_features(X_train,X_test,y_train,y_test) # 调用 test_RandomForestRegressor_max_features
+    do_RandomForestRegressor(X_train,X_test,y_train,y_test) # 调用 do_RandomForestRegressor
+    # do_RandomForestRegressor_num(X_train,X_test,y_train,y_test) # 调用 do_RandomForestRegressor_num
+    # do_RandomForestRegressor_max_depth(X_train,X_test,y_train,y_test) # 调用 do_RandomForestRegressor_max_depth
+    # do_RandomForestRegressor_max_features(X_train,X_test,y_train,y_test) # 调用 do_RandomForestRegressor_max_features
 

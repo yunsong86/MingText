@@ -21,7 +21,7 @@ def load_data_classification():
     digits=datasets.load_digits() # 使用 scikit-learn 自带的 digits 数据集
     return cross_validation.train_test_split(digits.data,digits.target,
     test_size=0.25,random_state=0,stratify=digits.target) # 分层采样拆分成训练集和测试集，测试集大小为原始数据集大小的 1/4
-def test_AdaBoostClassifier(*data):
+def do_AdaBoostClassifier(*data):
     '''
     测试 AdaBoostClassifier 的用法，绘制 AdaBoostClassifier 的预测性能随基础分类器数量的影响
 
@@ -43,7 +43,7 @@ def test_AdaBoostClassifier(*data):
     ax.legend(loc="best")
     ax.set_title("AdaBoostClassifier")
     plt.show()
-def test_AdaBoostClassifier_base_classifier(*data):
+def do_AdaBoostClassifier_base_classifier(*data):
     '''
     测试  AdaBoostClassifier 的预测性能随基础分类器数量和基础分类器的类型的影响
 
@@ -82,7 +82,7 @@ def test_AdaBoostClassifier_base_classifier(*data):
     ax.set_ylim(0,1)
     ax.set_title("AdaBoostClassifier with Gaussian Naive Bayes")
     plt.show()
-def test_AdaBoostClassifier_learning_rate(*data):
+def do_AdaBoostClassifier_learning_rate(*data):
     '''
     测试  AdaBoostClassifier 的预测性能随学习率的影响
 
@@ -107,7 +107,7 @@ def test_AdaBoostClassifier_learning_rate(*data):
     ax.legend(loc="best")
     ax.set_title("AdaBoostClassifier")
     plt.show()
-def test_AdaBoostClassifier_algorithm(*data):
+def do_AdaBoostClassifier_algorithm(*data):
     '''
     测试  AdaBoostClassifier 的预测性能随学习率和 algorithm 参数的影响
 
@@ -139,7 +139,7 @@ def test_AdaBoostClassifier_algorithm(*data):
     plt.show()
 if __name__=='__main__':
     X_train,X_test,y_train,y_test=load_data_classification() # 获取分类数据
-    test_AdaBoostClassifier(X_train,X_test,y_train,y_test) # 调用 test_AdaBoostClassifier
-    # test_AdaBoostClassifier_base_classifier(X_train,X_test,y_train,y_test) # 调用 test_AdaBoostClassifier_base_classifier
-    # test_AdaBoostClassifier_learning_rate(X_train,X_test,y_train,y_test) # 调用 test_AdaBoostClassifier_learning_rate
-    # test_AdaBoostClassifier_algorithm(X_train,X_test,y_train,y_test) # 调用 test_AdaBoostClassifier_algorithm
+    do_AdaBoostClassifier(X_train,X_test,y_train,y_test) # 调用 do_AdaBoostClassifier
+    # do_AdaBoostClassifier_base_classifier(X_train,X_test,y_train,y_test) # 调用 do_AdaBoostClassifier_base_classifier
+    # do_AdaBoostClassifier_learning_rate(X_train,X_test,y_train,y_test) # 调用 do_AdaBoostClassifier_learning_rate
+    # do_AdaBoostClassifier_algorithm(X_train,X_test,y_train,y_test) # 调用 do_AdaBoostClassifier_algorithm

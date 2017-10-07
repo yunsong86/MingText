@@ -1,30 +1,27 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# -*- coding:utf-8 -*- 
 """
-    集成学习
-    ~~~~~~~~~~~~~~~~
-
-    GradientBoostingClassifier
-
-    :copyright: (c) 2016 by the huaxz1986.
-    :license: lgpl-3.0, see LICENSE for more details.
+@author: PANYUNSONG
+@file: classifyNewsBaseOnGDBT.py
+@time: 2017/10/7 21:39
+@desc: python3.6
 """
 
-import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_files
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn import ensemble
 import numpy as np
-from sklearn import datasets, cross_validation, ensemble
+import matplotlib.pyplot as plt
 
 
-def load_data_classification():
-    '''
-    加载用于分类问题的数据集
 
-    :return: 一个元组，用于分类问题。元组元素依次为：训练样本集、测试样本集、训练样本集对应的标记、测试样本集对应的标记
-    '''
-    digits = datasets.load_digits()  # 使用 scikit-learn 自带的 digits 数据集
-    return cross_validation.train_test_split(digits.data, digits.target,
-                                             test_size=0.25, random_state=0,
-                                             stratify=digits.target)  # 分层采样拆分成训练集和测试集，测试集大小为原始数据集大小的 1/4
-
+def load_new_data(corpus_dir):
+    news = load_files(corpus_dir, encoding='utf-8')
+    tfidf_vect = TfidfVectorizer()
+    X = tfidf_vect.fit_transform(news.data)
+    X_train, X_test, y_train, y_test = train_test_split(X, news.target, test_size=0.3, stratify=news.target)
+    return X_train, X_test, y_train, y_test
 
 def do_GradientBoostingClassifier(*data):
     '''
@@ -180,8 +177,10 @@ def do_GradientBoostingClassifier_max_features(*data):
     plt.show()
 
 
+
 if __name__ == '__main__':
-    X_train, X_test, y_train, y_test = load_data_classification()  # 获取分类数据
+    corpus_dir = 'D:/UbunutWin/corpus/news_data/BQ20_seg'
+    X_train, X_test, y_train, y_test = load_new_data(corpus_dir)
     do_GradientBoostingClassifier(X_train, X_test, y_train, y_test)  # 调用 do_GradientBoostingClassifier
     # do_GradientBoostingClassifier_num(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_num
     # do_GradientBoostingClassifier_maxdepth(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_maxdepth

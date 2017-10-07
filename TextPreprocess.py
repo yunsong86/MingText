@@ -174,6 +174,8 @@ class TextPreprocess:
                 self.dataset_Bunch.contents.append(seg_corpus)  # 构建分词文本内容列表
                 file_read.close()
                 # 词袋对象持久化
+        if not os.path.exists(self.model_path ):
+            os.mkdir(self.model_path)
         file_obj = open(self.model_path + "/" + self.trainset_file_name, "wb")
         pickle.dump(self.dataset_Bunch, file_obj)
         file_obj.close()
@@ -187,6 +189,7 @@ class TextPreprocess:
         if (self.model_path == "" or self.tfidf_wordbag_file_name == "" or self.stopword_path == ""):
             print("model_path，word_bag或stopword_path不能为空")
             return
+
         # 读取持久化后的训练集对象
         file_obj = open(self.model_path +"/"+ self.trainset_file_name, "rb")
         self.dataset_Bunch = pickle.load(file_obj)
@@ -198,11 +201,13 @@ class TextPreprocess:
         # 构建语料
         corpus = self.dataset_Bunch.contents
         # 使用TfidfVectorizer初始化向量空间模型--创建词袋
-        vectorizer = TfidfVectorizer(max_df=0.9)
+        vectorizer = TfidfVectorizer(sublinear_tf=True, max_df= 0.5)
         # 文本转为词频矩阵
         self.tfidf_wordbag_Bunch.tfidf = vectorizer.fit_transform(corpus)
         # 保存词袋词典文件
         self.tfidf_wordbag_Bunch.vocabulary = vectorizer.vocabulary_
+        if not os.path.exists(self.model_path ):
+            os.mkdir(self.model_path)
         # 创建词袋的持久化
         file_obj = open(self.model_path + "/" + self.tfidf_wordbag_file_name, "wb")
         pickle.dump(self.tfidf_wordbag_Bunch, file_obj)

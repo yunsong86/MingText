@@ -24,9 +24,9 @@ def creat_data(n):
     y = np.sin(X).ravel()
     noise_num=(int)(n/5)
     y[::5] += 3 * (0.5 - np.random.rand(noise_num)) # 每第5个样本，就在该样本的值上添加噪音
-    return cross_validation.train_test_split(X, y,
-		test_size=0.25,random_state=1) # 拆分原始数据集为训练集和测试集，其中测试集大小为元素数据集大小的 1/4
-def test_DecisionTreeRegressor(*data):
+    return cross_validation.train_do_Dsplit(X, y,
+		do_Dsize=0.25,random_state=1) # 拆分原始数据集为训练集和测试集，其中测试集大小为元素数据集大小的 1/4
+def do_DDecisionTreeRegressor(*data):
     '''
     测试 DecisionTreeRegressor 的用法
 
@@ -51,7 +51,7 @@ def test_DecisionTreeRegressor(*data):
     ax.set_title("Decision Tree Regression")
     ax.legend(framealpha=0.5)
     plt.show()
-def test_DecisionTreeRegressor_splitter(*data):
+def do_DecisionTreeRegressor_splitter(*data):
     '''
     测试 DecisionTreeRegressor 预测性能随划分类型的影响
 
@@ -66,7 +66,7 @@ def test_DecisionTreeRegressor_splitter(*data):
         print("Splitter %s"%splitter)
         print("Training score:%f"%(regr.score(X_train,y_train)))
         print("Testing score:%f"%(regr.score(X_test,y_test)))
-def test_DecisionTreeRegressor_depth(*data,maxdepth):
+def do_DDecisionTreeRegressor_depth(*data,maxdepth):
     '''
     测试 DecisionTreeRegressor 预测性能随  max_depth 的影响
 
@@ -96,6 +96,6 @@ def test_DecisionTreeRegressor_depth(*data,maxdepth):
     plt.show()
 if __name__=='__main__':
     X_train,X_test,y_train,y_test=creat_data(100) # 产生用于回归问题的数据集
-    test_DecisionTreeRegressor(X_train,X_test,y_train,y_test) # 调用 test_DecisionTreeRegressor
-    # test_DecisionTreeRegressor_splitter(X_train,X_test,y_train,y_test) # 调用 test_DecisionTreeRegressor_splitter
-    # test_DecisionTreeRegressor_depth(X_train,X_test,y_train,y_test,maxdepth=20) # 调用 test_DecisionTreeRegressor_depth
+    do_DDecisionTreeRegressor(X_train,X_test,y_train,y_test) # 调用 do_DDecisionTreeRegressor
+    # do_DDecisionTreeRegressor_splitter(X_train,X_test,y_train,y_test) # 调用 do_DDecisionTreeRegressor_splitter
+    # do_DDecisionTreeRegressor_depth(X_train,X_test,y_train,y_test,maxdepth=20) # 调用 do_DDecisionTreeRegressor_depth

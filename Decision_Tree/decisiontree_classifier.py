@@ -24,7 +24,7 @@ def load_data():
     y_train=iris.target
     return cross_validation.train_test_split(X_train, y_train,test_size=0.25,
 		random_state=0,stratify=y_train)# 分层采样拆分成训练集和测试集，测试集大小为原始数据集大小的 1/4
-def test_DecisionTreeClassifier(*data):
+def do_DecisionTreeClassifier(*data):
     '''
     测试 DecisionTreeClassifier 的用法
 
@@ -37,7 +37,7 @@ def test_DecisionTreeClassifier(*data):
 
     print("Training score:%f"%(clf.score(X_train,y_train)))
     print("Testing score:%f"%(clf.score(X_test,y_test)))
-def test_DecisionTreeClassifier_criterion(*data):
+def do_DecisionTreeClassifier_criterion(*data):
     '''
     测试 DecisionTreeClassifier 的预测性能随 criterion 参数的影响
 
@@ -52,7 +52,7 @@ def test_DecisionTreeClassifier_criterion(*data):
         print("criterion:%s"%criterion)
         print("Training score:%f"%(clf.score(X_train,y_train)))
         print("Testing score:%f"%(clf.score(X_test,y_test)))
-def test_DecisionTreeClassifier_splitter(*data):
+def do_DecisionTreeClassifier_splitter(*data):
     '''
     测试 DecisionTreeClassifier 的预测性能随划分类型的影响
 
@@ -67,7 +67,7 @@ def test_DecisionTreeClassifier_splitter(*data):
         print("splitter:%s"%splitter)
         print("Training score:%f"%(clf.score(X_train,y_train)))
         print("Testing score:%f"%(clf.score(X_test,y_test)))
-def test_DecisionTreeClassifier_depth(*data,maxdepth):
+def do_DecisionTreeClassifier_depth(*data,maxdepth):
     '''
     测试 DecisionTreeClassifier 的预测性能随 max_depth 参数的影响
 
@@ -97,7 +97,7 @@ def test_DecisionTreeClassifier_depth(*data,maxdepth):
     plt.show()
 if __name__=='__main__':
     X_train,X_test,y_train,y_test=load_data() # 产生用于分类问题的数据集
-    test_DecisionTreeClassifier(X_train,X_test,y_train,y_test) # 调用 test_DecisionTreeClassifier
-    # test_DecisionTreeClassifier_criterion(X_train,X_test,y_train,y_test) # 调用 test_DecisionTreeClassifier_criterion
-    # test_DecisionTreeClassifier_splitter(X_train,X_test,y_train,y_test) # 调用 test_DecisionTreeClassifier_splitter
-    # test_DecisionTreeClassifier_depth(X_train,X_test,y_train,y_test,maxdepth=100) # 调用 test_DecisionTreeClassifier_depth
+    do_DecisionTreeClassifier(X_train,X_test,y_train,y_test) # 调用 do_DecisionTreeClassifier
+    # do_DecisionTreeClassifier_criterion(X_train,X_test,y_train,y_test) # 调用 do_DecisionTreeClassifier_criterion
+    # do_DecisionTreeClassifier_splitter(X_train,X_test,y_train,y_test) # 调用 do_DecisionTreeClassifier_splitter
+    # do_DecisionTreeClassifier_depth(X_train,X_test,y_train,y_test,maxdepth=100) # 调用 do_DecisionTreeClassifier_depth

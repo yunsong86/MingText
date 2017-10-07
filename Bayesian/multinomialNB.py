@@ -13,7 +13,7 @@ from sklearn import naive_bayes
 import  numpy as np
 import  matplotlib.pyplot as plt
 
-def test_MultinomialNB(*data):
+def do_MultinomialNB(*data):
     '''
     测试 MultinomialNB 的用法
 
@@ -25,7 +25,7 @@ def test_MultinomialNB(*data):
     cls.fit(X_train,y_train)
     print('Training Score: %.2f' % cls.score(X_train,y_train))
     print('Testing Score: %.2f' % cls.score(X_test, y_test))
-def test_MultinomialNB_alpha(*data):
+def do_MultinomialNB_alpha(*data):
     '''
     测试 MultinomialNB 的预测性能随 alpha 参数的影响
 

@@ -13,7 +13,7 @@ from sklearn import naive_bayes
 import  numpy as np
 import  matplotlib.pyplot as plt
 
-def test_BernoulliNB(*data):
+def do_BernoulliNB(*data):
     '''
     测试 BernoulliNB 的用法
 
@@ -25,7 +25,7 @@ def test_BernoulliNB(*data):
     cls.fit(X_train,y_train)
     print('Training Score: %.2f' % cls.score(X_train,y_train))
     print('Testing Score: %.2f' % cls.score(X_test, y_test))
-def test_BernoulliNB_alpha(*data):
+def do_BernoulliNB_alpha(*data):
     '''
     测试 BernoulliNB 的预测性能随 alpha 参数的影响
 
@@ -54,7 +54,7 @@ def test_BernoulliNB_alpha(*data):
     ax.set_xscale("log")
     ax.legend(loc="best")
     plt.show()
-def test_BernoulliNB_binarize(*data):
+def do_BernoulliNB_binarize(*data):
     '''
     测试 BernoulliNB 的预测性能随 binarize 参数的影响
 

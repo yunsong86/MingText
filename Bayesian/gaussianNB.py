@@ -10,7 +10,7 @@
 """
 from sklearn import naive_bayes
 
-def test_GaussianNB(*data):
+def do_GaussianNB(*data):
     '''
     测试 GaussianNB 的用法
 

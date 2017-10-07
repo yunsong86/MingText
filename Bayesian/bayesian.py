@@ -9,11 +9,11 @@
     :license: lgpl-3.0, see LICENSE for more details.
 """
 
-from sklearn import datasets, cross_validation, naive_bayes
+from sklearn import datasets, model_selection, naive_bayes
 import matplotlib.pyplot as plt
-from .gaussianNB import test_GaussianNB
-from .multinomialNB import test_MultinomialNB, test_MultinomialNB_alpha
-from .bernoulliNB import test_BernoulliNB, test_BernoulliNB_alpha, test_BernoulliNB_binarize
+from Bayesian.gaussianNB import do_GaussianNB
+from Bayesian.multinomialNB import do_MultinomialNB, do_MultinomialNB_alpha
+from Bayesian.bernoulliNB import do_BernoulliNB, do_BernoulliNB_alpha, do_BernoulliNB_binarize
 
 
 def load_data():
@@ -23,7 +23,7 @@ def load_data():
     :return: 一个元组，用于分类问题。元组元素依次为：训练样本集、测试样本集、训练样本集对应的标记、测试样本集对应的标记
     '''
     digits = datasets.load_digits()  # 加载 scikit-learn 自带的 digits 数据集
-    return cross_validation.train_test_split(digits.data, digits.target,
+    return model_selection.train_test_split(digits.data, digits.target,
                                              test_size=0.25, random_state=0,
                                              stratify=digits.target)  # 分层采样拆分成训练集和测试集，测试集大小为原始数据集大小的 1/4
 
@@ -45,9 +45,10 @@ def show_digits():
 
 if __name__ == '__main__':
     X_train, X_test, y_train, y_test = load_data()  # 产生用于分类问题的数据集
-    test_GaussianNB(X_train, X_test, y_train, y_test)  # 调用 test_GaussianNB
-    test_MultinomialNB(X_train, X_test, y_train, y_test)  # 调用 test_MultinomialNB
-    test_MultinomialNB_alpha(X_train, X_test, y_train, y_test)  # 调用 test_MultinomialNB_alpha
-    test_BernoulliNB(X_train, X_test, y_train, y_test)  # 调用 test_BernoulliNB
-    test_BernoulliNB_alpha(X_train, X_test, y_train, y_test)  # 调用 test_BernoulliNB_alpha
-    test_BernoulliNB_binarize(X_train, X_test, y_train, y_test)  # 调用 test_BernoulliNB_binarize
+    show_digits()
+    # do_GaussianNB(X_train, X_test, y_train, y_test)  # 调用 test_GaussianNB
+    # do_MultinomialNB(X_train, X_test, y_train, y_test)  # 调用 test_MultinomialNB
+    # do_MultinomialNB_alpha(X_train, X_test, y_train, y_test)  # 调用 test_MultinomialNB_alpha
+    # do_BernoulliNB(X_train, X_test, y_train, y_test)  # 调用 test_BernoulliNB
+    # do_BernoulliNB_alpha(X_train, X_test, y_train, y_test)  # 调用 test_BernoulliNB_alpha
+    # do_BernoulliNB_binarize(X_train, X_test, y_train, y_test)  # 调用 test_BernoulliNB_binarize

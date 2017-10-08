@@ -1,8 +1,12 @@
 # _*_coding:utf-8 _*_
 import logging
 
+
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 import fasttext
+'''
+ubuntu可用，win不可用
+'''
 
 # 训练模型
 classifier = fasttext.supervised("D:/UbunutWin/corpus/fasttextcorpus/news_fasttext_train.txt",

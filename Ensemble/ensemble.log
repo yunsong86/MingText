@@ -1,0 +1,40 @@
+2017-10-08 14:27:32,700 tmp.py[line:192] INFO ******GDBT CALSSIFY BQ20 NEWS******
+2017-10-08 14:27:41,227 tmp.py[line:198] INFO -----n_features-----1500
+2017-10-08 14:27:41,227 tmp.py[line:199] INFO (12912, 1500)
+2017-10-08 14:27:41,307 tmp.py[line:203] INFO complete csr_matrix toarray
+2017-10-08 14:53:02,554 tmp.py[line:206] INFO 耗时： 1528
+2017-10-08 14:53:09,465 tmp.py[line:198] INFO -----n_features-----1600
+2017-10-08 14:53:09,465 tmp.py[line:199] INFO (12912, 1600)
+2017-10-08 14:53:09,561 tmp.py[line:203] INFO complete csr_matrix toarray
+2017-10-08 15:19:45,580 tmp.py[line:206] INFO 耗时： 1603
+2017-10-08 15:19:52,500 tmp.py[line:198] INFO -----n_features-----1700
+2017-10-08 15:19:52,500 tmp.py[line:199] INFO (12912, 1700)
+2017-10-08 15:19:52,596 tmp.py[line:203] INFO complete csr_matrix toarray
+2017-10-08 15:53:46,419 tmp.py[line:206] INFO 耗时： 2040
+2017-10-08 15:53:57,697 tmp.py[line:198] INFO -----n_features-----1800
+2017-10-08 15:53:57,697 tmp.py[line:199] INFO (12912, 1800)
+2017-10-08 15:53:57,829 tmp.py[line:203] INFO complete csr_matrix toarray
+2017-10-08 16:32:52,430 tmp.py[line:206] INFO 耗时： 2346
+2017-10-08 16:33:22,938 tmp.py[line:198] INFO -----n_features-----1900
+2017-10-08 16:33:22,938 tmp.py[line:199] INFO (12912, 1900)
+2017-10-08 16:33:23,052 tmp.py[line:203] INFO complete csr_matrix toarray
+2017-10-08 17:08:08,822 tmp.py[line:192] INFO ******GDBT CALSSIFY BQ20 NEWS******
+2017-10-08 17:08:20,946 tmp.py[line:198] INFO -----n_features-----1900
+2017-10-08 17:08:20,946 tmp.py[line:199] INFO (12912, 1900)
+2017-10-08 17:08:21,058 tmp.py[line:203] INFO complete csr_matrix toarray
+2017-10-08 17:41:43,333 tmp.py[line:206] INFO 耗时： 2010
+2017-10-08 17:41:50,325 tmp.py[line:198] INFO -----n_features-----2900
+2017-10-08 17:41:50,325 tmp.py[line:199] INFO (12912, 2900)
+2017-10-08 17:41:50,465 tmp.py[line:203] INFO complete csr_matrix toarray
+2017-10-08 18:30:17,850 tmp.py[line:206] INFO 耗时： 2914
+2017-10-08 18:30:24,832 tmp.py[line:198] INFO -----n_features-----3900
+2017-10-08 18:30:24,832 tmp.py[line:199] INFO (12912, 3900)
+2017-10-08 18:30:25,015 tmp.py[line:203] INFO complete csr_matrix toarray
+2017-10-08 19:36:43,709 tmp.py[line:206] INFO 耗时： 3985
+2017-10-08 19:36:50,758 tmp.py[line:198] INFO -----n_features-----4900
+2017-10-08 19:36:50,758 tmp.py[line:199] INFO (12912, 4900)
+2017-10-08 19:36:50,961 tmp.py[line:203] INFO complete csr_matrix toarray
+2017-10-08 21:14:40,643 tmp.py[line:206] INFO 耗时： 5876
+2017-10-08 21:14:51,464 tmp.py[line:198] INFO -----n_features-----5900
+2017-10-08 21:14:51,464 tmp.py[line:199] INFO (12912, 5900)
+2017-10-08 21:14:51,754 tmp.py[line:203] INFO complete csr_matrix toarray

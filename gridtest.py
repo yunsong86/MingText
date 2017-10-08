@@ -6,13 +6,7 @@ from sklearn.svm import SVC, LinearSVC
 from logger import logger
 
 # Set the parameters by cross-validation
-svc_tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4],
-                         'C': [1, 10, 100, 1000]},
-                        {'kernel': ['linear'], 'C': [1, 10, 100, 1000]}]
 
-lsvc_tuned_parameters = [{'C': [1, 10, 100, 1000],
-                          'multi_class': ['ovr', 'crammer_singer'],
-                          'loss': ['squared_hinge', 'squared_hinge']}]
 
 
 def evaluate_estimator(X_train, X_test, y_train, y_test, cl, parameters):

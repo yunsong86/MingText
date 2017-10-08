@@ -191,7 +191,7 @@ if __name__ == '__main__':
     corpus_dir = 'D:/UbunutWin/corpus/news_data/BQ20_seg'
     logger.info("******GDBT CALSSIFY BQ20 NEWS******")
     news = load_files(corpus_dir, encoding='utf-8')
-    for n in range(1500, 200000, 100):
+    for n in range(1900, 200000, 1000):
         s = datetime.now()
         tfidf_vect = TfidfVectorizer(max_features=n)
         X = tfidf_vect.fit_transform(news.data)

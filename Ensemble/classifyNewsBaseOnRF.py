@@ -29,7 +29,7 @@ def do_RandomForestClassifier(*data):
     :return: None
     '''
     X_train,X_test,y_train,y_test=data
-    clf=ensemble.RandomForestClassifier()
+    clf=ensemble.RandomForestClassifier(n_estimators = 100)
     clf.fit(X_train,y_train)
     print("Traing Score:%f"%clf.score(X_train,y_train))
     print("Testing Score:%f"%clf.score(X_test,y_test))
@@ -116,6 +116,6 @@ if __name__ == '__main__':
     corpus_dir = 'D:/UbunutWin/corpus/news_data/BQ20_seg'
     X_train, X_test, y_train, y_test = load_new_data(corpus_dir)
     do_RandomForestClassifier(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier
-    do_RandomForestClassifier_num(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_num
-    do_RandomForestClassifier_max_depth(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_max_depth
-    do_RandomForestClassifier_max_features(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_max_features
+    # do_RandomForestClassifier_num(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_num
+    # do_RandomForestClassifier_max_depth(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_max_depth
+    # do_RandomForestClassifier_max_features(X_train,X_test,y_train,y_test)  # 调用 do_RandomForestClassifier_max_features

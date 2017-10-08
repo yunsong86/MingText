@@ -15,10 +15,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
 def load_new_data(corpus_dir):
     news = load_files(corpus_dir, encoding='utf-8')
-    tfidf_vect = TfidfVectorizer()
+    tfidf_vect = TfidfVectorizer(max_features=100000)
     X = tfidf_vect.fit_transform(news.data)
 
     # # Don't need both X and transformer; they should be identical
@@ -30,7 +29,6 @@ def load_new_data(corpus_dir):
 
     X_train, X_test, y_train, y_test = train_test_split(X, news.target, test_size=0.3, stratify=news.target)
     return X_train, X_test, y_train, y_test
-
 
 
 def do_GradientBoostingClassifier(*data):
@@ -187,16 +185,24 @@ def do_GradientBoostingClassifier_max_features(*data):
     plt.show()
 
 
-
 if __name__ == '__main__':
     corpus_dir = 'D:/UbunutWin/corpus/news_data/BQ20_seg'
-    X_train, X_test, y_train, y_test = load_new_data(corpus_dir)
-    # X_train = X_train.toarray()
-    # X_test = X_test.toarray()
-    print('******toarry******')
-    do_GradientBoostingClassifier(X_train, X_test, y_train, y_test)  # 调用 do_GradientBoostingClassifier
-    # do_GradientBoostingClassifier_num(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_num
-    # do_GradientBoostingClassifier_maxdepth(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_maxdepth
-    # do_GradientBoostingClassifier_learning(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_learning
-    # do_GradientBoostingClassifier_subsample(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_subsample
-    # do_GradientBoostingClassifier_max_features(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_max_features
+    news = load_files(corpus_dir, encoding='utf-8')
+    for n in range(50, 200000, 100):
+        tfidf_vect = TfidfVectorizer(max_features=n)
+        X = tfidf_vect.fit_transform(news.data)
+        print(n)
+        print(X.shape)
+        X_train, X_test, y_train, y_test = train_test_split(X, news.target, test_size=0.3, stratify=news.target)
+        X_train = X_train.toarray()
+        X_test = X_test.toarray()
+
+        print('******toarry******\n')
+        do_GradientBoostingClassifier(X_train, X_test, y_train, y_test)  # 调用 do_GradientBoostingClassifier
+        print(n)
+        print()
+        # do_GradientBoostingClassifier_num(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_num
+        # do_GradientBoostingClassifier_maxdepth(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_maxdepth
+        # do_GradientBoostingClassifier_learning(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_learning
+        # do_GradientBoostingClassifier_subsample(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_subsample
+        # do_GradientBoostingClassifier_max_features(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_max_features

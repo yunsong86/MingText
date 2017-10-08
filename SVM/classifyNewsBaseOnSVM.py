@@ -260,11 +260,11 @@ if __name__ == "__main__":
     corpus_dir = 'D:/UbunutWin/corpus/news_data/BQ20_seg'
     X_train, X_test, y_train, y_test = load_new_data(corpus_dir)
 
-    do_SVC_linear(X_train, X_test, y_train, y_test)  # 调用 do_SVC_linear
-    # do_SVC_poly(X_train,X_test,y_train,y_test) # 调用 do_SVC_poly
-    # do_SVC_rbf(X_train,X_test,y_train,y_test) # 调用 do_SVC_rbf
-    # do_SVC_sigmoid(X_train,X_test,y_train,y_test) # do_SVC_sigmoid do_SVC_linear
-
+    # do_SVC_linear(X_train, X_test, y_train, y_test)  # 调用 do_SVC_linear
+    do_SVC_poly(X_train,X_test,y_train,y_test) # 调用 do_SVC_poly
+    do_SVC_rbf(X_train,X_test,y_train,y_test) # 调用 do_SVC_rbf
+    do_SVC_sigmoid(X_train,X_test,y_train,y_test) # do_SVC_sigmoid do_SVC_linear
+    #
     do_LinearSVC(X_train, X_test, y_train, y_test)  # 调用 do_LinearSVC
     do_LinearSVC_loss(X_train, X_test, y_train, y_test)  # 调用 do_LinearSVC_loss
     do_LinearSVC_L12(X_train, X_test, y_train, y_test)  # 调用 do_LinearSVC_L12

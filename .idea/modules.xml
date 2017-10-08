@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://D:/CMP/BrtaNLTK/.idea/BrtaNLTK.iml" filepath="D:/CMP/BrtaNLTK/.idea/BrtaNLTK.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/MingText.iml" filepath="$PROJECT_DIR$/.idea/MingText.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../book1/.idea/book1.iml" filepath="$PROJECT_DIR$/../book1/.idea/book1.iml" />
     </modules>
   </component>
 </project>

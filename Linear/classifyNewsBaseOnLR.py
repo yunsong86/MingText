@@ -72,5 +72,5 @@ if __name__=='__main__':
     corpus_dir = 'D:/UbunutWin/corpus/news_data/BQ20_seg'
     X_train, X_test, y_train, y_test = load_new_data(corpus_dir)
     do_LogisticRegression(X_train,X_test,y_train,y_test) # 调用  do_LogisticRegression
-    do_LogisticRegression_multinomial(X_train,X_test,y_train,y_test) # 调用  do_LogisticRegression_multinomial
-    do_LogisticRegression_C(X_train,X_test,y_train,y_test) # 调用  do_LogisticRegression_C
+    # do_LogisticRegression_multinomial(X_train,X_test,y_train,y_test) # 调用  do_LogisticRegression_multinomial
+    # do_LogisticRegression_C(X_train,X_test,y_train,y_test) # 调用  do_LogisticRegression_C

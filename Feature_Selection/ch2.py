@@ -23,7 +23,7 @@ X_train = vectorizer.fit_transform(data_train.data)
 X_test = vectorizer.transform(data_test.data)
 feature_names = vectorizer.get_feature_names()
 
-ch2 = SelectKBest(chi2, k=200)
+ch2 = SelectKBest(chi2, k=50)
 X_train = ch2.fit_transform(X_train, y_train)
 X_test = ch2.transform(X_test)
 
@@ -31,3 +31,5 @@ X_test = ch2.transform(X_test)
 feature_names = [feature_names[i] for i in ch2.get_support(indices=True)]
 
 print(len(feature_names))
+for fn in feature_names:
+    print(fn)

@@ -49,44 +49,32 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.utils.extmath import density
 from sklearn import metrics
 
-
 # Display progress logs on stdout
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(levelname)s %(message)s')
-
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 # parse commandline arguments
 op = OptionParser()
-op.add_option("--report",
-              action="store_true", dest="print_report",
+op.add_option("--report", action="store_true", dest="print_report",
               help="Print a detailed classification report.")
-op.add_option("--chi2_select",
-              action="store", type="int", dest="select_chi2",
+op.add_option("--chi2_select", action="store", type="int", dest="select_chi2",
               help="Select some number of features using a chi-squared test")
-op.add_option("--confusion_matrix",
-              action="store_true", dest="print_cm",
+op.add_option("--confusion_matrix", action="store_true", dest="print_cm",
               help="Print the confusion matrix.")
-op.add_option("--top10",
-              action="store_true", dest="print_top10",
-              help="Print ten most discriminative terms per class"
-                   " for every classifier.")
-op.add_option("--all_categories",
-              action="store_true", dest="all_categories",
+op.add_option("--top10", action="store_true", dest="print_top10",
+              help="Print ten most discriminative terms per class for every classifier.")
+op.add_option("--all_categories", action="store_true", dest="all_categories",
               help="Whether to use all categories or not.")
-op.add_option("--use_hashing",
-              action="store_true",
+op.add_option("--use_hashing", action="store_true",
               help="Use a hashing vectorizer.")
-op.add_option("--n_features",
-              action="store", type=int, default=2 ** 16,
+op.add_option("--n_features", action="store", type=int, default=2 ** 16,
               help="n_features when using the hashing vectorizer.")
-op.add_option("--filtered",
-              action="store_true",
-              help="Remove newsgroup information that is easily overfit: "
-                   "headers, signatures, and quoting.")
+op.add_option("--filtered", action="store_true",
+              help="Remove newsgroup information that is easily overfit: headers, signatures, and quoting.")
 
 
 def is_interactive():
     return not hasattr(sys.modules['__main__'], '__file__')
+
 
 # work-around for Jupyter notebook and IPython console
 argv = [] if is_interactive() else sys.argv[1:]
@@ -98,7 +86,6 @@ if len(args) > 0:
 print(__doc__)
 op.print_help()
 print()
-
 
 # #############################################################################
 # Load some categories from the training set
@@ -136,6 +123,7 @@ target_names = data_train.target_names
 def size_mb(docs):
     return sum(len(s.encode('utf-8')) for s in docs) / 1e6
 
+
 data_train_size_mb = size_mb(data_train.data)
 data_test_size_mb = size_mb(data_test.data)
 
@@ -152,12 +140,10 @@ y_train, y_test = data_train.target, data_test.target
 print("Extracting features from the training data using a sparse vectorizer")
 t0 = time()
 if opts.use_hashing:
-    vectorizer = HashingVectorizer(stop_words='english', alternate_sign=False,
-                                   n_features=opts.n_features)
+    vectorizer = HashingVectorizer(stop_words='english', alternate_sign=False, n_features=opts.n_features)
     X_train = vectorizer.transform(data_train.data)
 else:
-    vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5,
-                                 stop_words='english')
+    vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5, stop_words='english')
     X_train = vectorizer.fit_transform(data_train.data)
 duration = time() - t0
 print("done in %fs at %0.3fMB/s" % (duration, data_train_size_mb / duration))
@@ -247,11 +233,11 @@ def benchmark(clf):
 
 results = []
 for clf, name in (
-        (RidgeClassifier(tol=1e-2, solver="lsqr"), "Ridge Classifier"),
-        (Perceptron(n_iter=50), "Perceptron"),
-        (PassiveAggressiveClassifier(n_iter=50), "Passive-Aggressive"),
-        (KNeighborsClassifier(n_neighbors=10), "kNN"),
-        (RandomForestClassifier(n_estimators=100), "Random forest")):
+    (RidgeClassifier(tol=1e-2, solver="lsqr"), "Ridge Classifier"),
+    (Perceptron(n_iter=50), "Perceptron"),
+    (PassiveAggressiveClassifier(n_iter=50), "Passive-Aggressive"),
+    (KNeighborsClassifier(n_neighbors=10), "kNN"),
+    (RandomForestClassifier(n_estimators=100), "Random forest")):
     print('=' * 80)
     print(name)
     results.append(benchmark(clf))
@@ -289,9 +275,9 @@ print("LinearSVC with L1-based feature selection")
 # The smaller C, the stronger the regularization.
 # The more regularization, the more sparsity.
 results.append(benchmark(Pipeline([
-  ('feature_selection', SelectFromModel(LinearSVC(penalty="l1", dual=False,
-                                                  tol=1e-3))),
-  ('classification', LinearSVC(penalty="l2"))])))
+    ('feature_selection', SelectFromModel(LinearSVC(penalty="l1", dual=False,
+                                                    tol=1e-3))),
+    ('classification', LinearSVC(penalty="l2"))])))
 
 # make some plots
 

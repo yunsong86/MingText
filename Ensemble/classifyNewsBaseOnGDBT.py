@@ -6,20 +6,63 @@
 @time: 2017/10/7 21:39
 @desc: python3.6
 """
+import numpy as np
 
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.datasets import load_files
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import ensemble
-import numpy as np
 import matplotlib.pyplot as plt
 
+import logging
+from logging.handlers import RotatingFileHandler
+
+logging.root.setLevel(level=logging.INFO)
+Rthandler = RotatingFileHandler(filename='classifyNewsBaseOnGDBT.log', mode='a', maxBytes=1 * 1024 * 1024,
+                                backupCount=2)
+Rthandler.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
+Rthandler.setFormatter(formatter)
+logging.getLogger('').addHandler(Rthandler)
+
+##################################################
+# 定义一个StreamHandler，将INFO级别或更高的日志信息打印到标准错误，并将其添加到当前的日志处理对象#
+
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
+console.setFormatter(formatter)
+logging.getLogger('').addHandler(console)
+
+logger = logging.getLogger()
 
 
 def load_new_data(corpus_dir):
     news = load_files(corpus_dir, encoding='utf-8')
-    tfidf_vect = TfidfVectorizer()
+
+    tfidf_vect2 = TfidfVectorizer()
+    X2 = tfidf_vect2.fit_transform(news.data)
+    logging.info(X2.shape)
+
+    tfidf_vect3 = TfidfVectorizer(max_df=0.5)
+    X3 = tfidf_vect3.fit_transform(news.data)
+    logging.info(X3.shape)
+
+    tfidf_vect = TfidfVectorizer(min_df=3)
     X = tfidf_vect.fit_transform(news.data)
+    logging.info(X.shape)
+
+    tfidf_vect = TfidfVectorizer(min_df=4)
+    X = tfidf_vect.fit_transform(news.data)
+    logging.info(X.shape)
+
+    tfidf_vect = TfidfVectorizer(min_df=5)
+    X = tfidf_vect.fit_transform(news.data)
+    logging.info(X.shape)
+
+    tfidf_vect4 = TfidfVectorizer(max_df=0.5, min_df=5)
+    X4 = tfidf_vect4.fit_transform(news.data)
+    logging.info(X4.shape)
 
     # # Don't need both X and transformer; they should be identical
     # matrix_terms = np.array(tfidf_vect.get_feature_names())
@@ -30,7 +73,6 @@ def load_new_data(corpus_dir):
 
     X_train, X_test, y_train, y_test = train_test_split(X, news.target, test_size=0.3, stratify=news.target)
     return X_train, X_test, y_train, y_test
-
 
 
 def do_GradientBoostingClassifier(*data):
@@ -187,14 +229,29 @@ def do_GradientBoostingClassifier_max_features(*data):
     plt.show()
 
 
+def do_GradientBoostingClassifier_tfidf_min_df():
+    corpus_dir = '/mnt/hgfs/UbunutWin/corpus/news_data_seg'
+    news = load_files(corpus_dir, encoding='utf-8')
+
+    for i in range(1, 20):
+        tfidf_vect = TfidfVectorizer(min_df=5)
+        X = tfidf_vect.fit_transform(news.data)
+        logging.info(X.shape)
+        X = X.toarray()
+        clf = ensemble.GradientBoostingClassifier()
+        score_evalute = cross_val_score(clf, X=X, y=news.target, cv=3, n_jobs=-1)
+        logging.info("evaluete score: " + str(score_evalute))
+
 
 if __name__ == '__main__':
-    corpus_dir = 'D:/UbunutWin/corpus/news_data/BQ20_seg'
-    X_train, X_test, y_train, y_test = load_new_data(corpus_dir)
+    do_GradientBoostingClassifier_tfidf_min_df()
+
+    # corpus_dir = '/mnt/hgfs/UbunutWin/corpus/news_data_seg'
+    # X_train, X_test, y_train, y_test = load_new_data(corpus_dir)
     # X_train = X_train.toarray()
     # X_test = X_test.toarray()
-    print('******toarry******')
-    do_GradientBoostingClassifier(X_train, X_test, y_train, y_test)  # 调用 do_GradientBoostingClassifier
+    # print('******toarry******')
+    # do_GradientBoostingClassifier(X_train, X_test, y_train, y_test)  # 调用 do_GradientBoostingClassifier
     # do_GradientBoostingClassifier_num(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_num
     # do_GradientBoostingClassifier_maxdepth(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_maxdepth
     # do_GradientBoostingClassifier_learning(X_train,X_test,y_train,y_test) # 调用 do_GradientBoostingClassifier_learning

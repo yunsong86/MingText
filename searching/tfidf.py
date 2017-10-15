@@ -9,6 +9,9 @@
 
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
+
+
+
 docs = ['北京 北京 北京   北京 上海  南京 ',
         '上海 上海 上海 上海  上海 上海 南京 北京 北京',
         '北京,上海',
